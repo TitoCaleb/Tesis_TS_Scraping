@@ -24,7 +24,7 @@ export class ProductsController {
   async scrape() {
     await initDataBase();
     await this.props.scrapservice.scrapeCyC();
-    await this.props.scrapservice.scrapeImpacto();
+    /* await this.props.scrapservice.scrapeImpacto(); */
     await this.props.scrapservice.scrapeSercoplus();
   }
 }

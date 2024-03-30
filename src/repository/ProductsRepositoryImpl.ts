@@ -33,6 +33,7 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
         new Product({
           id: product._id,
           imgAlt: product.imgAlt,
+          imgSrc: product.imgSrc ?? product.dataOriginal,
           priceDolar: product.priceDolar,
           priceSoles: product.priceSoles,
           url: product.url,
@@ -58,6 +59,7 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
         new Product({
           id: product._id,
           imgAlt: product.imgAlt,
+          imgSrc: product.imgSrc ?? product.dataOriginal,
           priceDolar: product.priceDolar,
           priceSoles: product.priceSoles,
           url: product.url,

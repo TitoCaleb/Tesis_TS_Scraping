@@ -11,15 +11,6 @@ import * as cron from 'node-cron';
 import * as cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT;
-
-//Enrutamiento
-const routerApi = (app: express.Application) => {
-  const router = express.Router();
-  app.use('/api/v1', router);
-  router.use('/products', productsRouter);
-  router.use('/stores', storesRouter);
-};
 
 //Habilitar CORS
 const whitelist = ['http://localhost:5173'];
@@ -32,6 +23,16 @@ const options: cors.CorsOptions = {
     }
   },
 };
+app.use(cors(options));
+const PORT = process.env.PORT;
+
+//Enrutamiento
+const routerApi = (app: express.Application) => {
+  const router = express.Router();
+  app.use('/api/v1', router);
+  router.use('/products', productsRouter);
+  router.use('/stores', storesRouter);
+};
 
 //Middlewares
 routerApi(app);
@@ -39,7 +40,6 @@ app.use(express.json());
 app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
-app.use(cors(options));
 
 // Creacion base de dato
 // let task = cron.schedule('*/2 * * * *', () => {
