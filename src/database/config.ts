@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { storeList } from './stores.js';
+import { categoryList } from './categories.js';
 
 const config = {
   user: process.env.DB_USER,
@@ -24,6 +25,10 @@ export const initDataBase = async () => {
       (collection) => collection.name === 'products',
     );
 
+    let collectionCategory = collections.find(
+      (collection) => collection.name === 'category',
+    );
+
     if (collectionProducts) {
       console.log('[INIT DB] No se creo Products porque ya existe');
     } else {
@@ -39,16 +44,29 @@ export const initDataBase = async () => {
         console.log('[INIT DB] Insertando datos en Stores');
         await stores.insertMany(storeList);
       }
-      return;
+    } else {
+      console.log('[INIT DB] Creado Collection Stores');
+      await database.createCollection('stores');
+      const stores = database.collection('stores');
+      console.log('[INIT DB] Insertando datos en Stores');
+      await stores.insertMany(storeList);
     }
 
-    console.log('[INIT DB] Creado Collection Stores');
-    await database.createCollection('stores');
-
-    const stores = database.collection('stores');
-
-    console.log('[INIT DB] Insertando datos en Stores');
-    await stores.insertMany(storeList);
+    if (collectionCategory) {
+      console.log('[INIT DB] No se creo Category porque ya existe');
+      const category = database.collection('category');
+      const categoryData = await category.find().toArray();
+      if (!categoryData.length) {
+        console.log('[INIT DB] Insertando datos en Category');
+        await category.insertMany(categoryList);
+      }
+    } else {
+      console.log('[INIT DB] Creado Collection Category');
+      await database.createCollection('category');
+      const category = database.collection('category');
+      console.log('[INIT DB] Insertando datos en Category');
+      await category.insertMany(categoryList);
+    }
   } finally {
     await client.close();
   }

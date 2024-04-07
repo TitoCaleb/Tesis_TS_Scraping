@@ -38,6 +38,8 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
           priceSoles: product.priceSoles,
           url: product.url,
           tienda: product.tienda,
+          dataOriginal: product.dataOriginal,
+          categoria: product.categoria,
         }),
     );
   }
@@ -64,6 +66,8 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
           priceSoles: product.priceSoles,
           url: product.url,
           tienda: product.tienda,
+          categoria: product.categoria,
+          dataOriginal: product.dataOriginal,
         }),
     );
   }

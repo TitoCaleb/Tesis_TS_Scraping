@@ -28,6 +28,7 @@ export class StoresRepositoryImpl implements StoresRepositoryI {
         new Store({
           id: store._id,
           name: store.name,
+          urls: store.urls,
         }),
     );
   }

@@ -18,6 +18,8 @@ export class Product {
 
   tienda: Store;
 
+  categoria: string;
+
   constructor(data?: Partial<Product>) {
     if (data) {
       Object.assign(this, data);
