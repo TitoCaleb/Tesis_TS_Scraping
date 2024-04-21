@@ -150,18 +150,17 @@ export class ScrapingRepositoryImpl implements ScrapingRepositoryI {
   async scrapImpacto(store: Store, { url, name }: UrlStore): Promise<void> {
     const { page, browser } = await this.configScraping(url);
 
-    const pageList = await page.$$('.pagination li');
-
-    const penultimateHTML = pageList[pageList.length - 2];
-
     const pageNumber =
-      (await page.evaluate((element) => element.outerHTML, penultimateHTML)) ||
-      undefined;
+      (await page.$$eval('.pagination li:nth-last-child(2) a', (elements) => {
+        const lastPageLink = elements[0];
+        if (!lastPageLink || !lastPageLink.textContent) return 0;
+        return parseInt(lastPageLink.textContent);
+      })) || 0;
 
     await this.props.mongoClient.connect();
 
     if (pageNumber) {
-      for (let i = 1; i <= Number(pageNumber); i++) {
+      for (let i = 1; i <= pageNumber; i++) {
         await page.goto(`${url}?page=${i}`);
         const cardInfo = await this.scrapyCardImpacto(page);
         await this.saveData(cardInfo, store, name);

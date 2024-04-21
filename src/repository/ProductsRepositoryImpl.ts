@@ -50,12 +50,43 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
     const productsCollection = database.collection(this.props.colletionName);
     const products = await productsCollection
       .find({ imgAlt: query.name })
+      .skip(Number(query.offset))
+      .limit(Number(query.limit))
       .toArray();
 
     if (!products) {
       throw new Boom('Product not found', { statusCode: 404 });
     }
 
+    return products.map(
+      (product) =>
+        new Product({
+          id: product._id,
+          imgAlt: product.imgAlt,
+          imgSrc: product.imgSrc ?? product.dataOriginal,
+          priceDolar: product.priceDolar,
+          priceSoles: product.priceSoles,
+          url: product.url,
+          tienda: product.tienda,
+          categoria: product.categoria,
+          dataOriginal: product.dataOriginal,
+        }),
+    );
+  }
+
+  async findByCategory({ query }: Request): Promise<Product[]> {
+    await this.props.mongoClient.connect();
+    const database = this.props.mongoClient.db(this.props.databaseName);
+    const productsCollection = database.collection(this.props.colletionName);
+    const products = await productsCollection
+      .find({ categoria: query.categoria })
+      .skip(Number(query.offset))
+      .limit(Number(query.limit))
+      .toArray();
+
+    if (!products) {
+      throw new Boom('Product not found', { statusCode: 404 });
+    }
     return products.map(
       (product) =>
         new Product({

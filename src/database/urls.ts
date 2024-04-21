@@ -26,7 +26,7 @@ export const urlsCyC = [
     name: CategoryNames.POWER_SUPPLY,
   },
   {
-    url: 'https://cyccomputer.pe/674-cooler-p-cpu-aire',
+    url: 'https://cyccomputer.pe/871-refrigeracion-aire',
     name: CategoryNames.COOLING,
   },
   {
@@ -34,11 +34,11 @@ export const urlsCyC = [
     name: CategoryNames.CASE,
   },
   {
-    url: 'https://cyccomputer.pe/675-cooler-p-cpu-liquido',
+    url: 'https://cyccomputer.pe/872-refrigeracion-liquida',
     name: CategoryNames.LIQUID_COOLING,
   },
   {
-    url: 'https://cyccomputer.pe/277-monitores',
+    url: 'https://cyccomputer.pe/239-monitores-tv-racks-accesorios',
     name: CategoryNames.MONITOR,
   },
   {
@@ -46,7 +46,7 @@ export const urlsCyC = [
     name: CategoryNames.MOUSE_AND_KEYBOARD,
   },
   {
-    url: 'https://cyccomputer.pe/260-audifonos-microfonos',
+    url: 'https://cyccomputer.pe/899-audifonos-con-microfono',
     name: CategoryNames.HEADPHONES,
   },
 ];

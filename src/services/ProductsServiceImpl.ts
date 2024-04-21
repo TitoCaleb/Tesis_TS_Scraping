@@ -18,4 +18,9 @@ export class ProductsServiceImpl implements ProductsServiceI {
     const response = this.props.productsRepository.findByName(req);
     return response;
   }
+
+  findByCategory(req: Request): Promise<Product[]> {
+    const response = this.props.productsRepository.findByCategory(req);
+    return response;
+  }
 }

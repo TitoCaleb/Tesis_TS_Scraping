@@ -24,4 +24,14 @@ productsRouter.get('/findByName', async (req, res, next) => {
   }
 });
 
+//GEt: Get product by categoty
+productsRouter.get('/findByCategory', async (req, res, next) => {
+  try {
+    const response = await productsController.findByCategory(req);
+    res.status(200).send(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { productsRouter };

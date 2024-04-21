@@ -21,10 +21,15 @@ export class ProductsController {
     return response;
   }
 
+  async findByCategory(request: Request) {
+    const response = await this.props.service.findByCategory(request);
+    return response;
+  }
+
   async scrape() {
     await initDataBase();
-    await this.props.scrapservice.scrapeCyC();
+    /* await this.props.scrapservice.scrapeCyC();
     await this.props.scrapservice.scrapeSercoplus();
-    /* await this.props.scrapservice.scrapeImpacto(); */
+    await this.props.scrapservice.scrapeImpacto(); */
   }
 }
