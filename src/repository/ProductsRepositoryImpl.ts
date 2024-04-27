@@ -3,6 +3,7 @@ import { Product } from '../domain/Product';
 import { ProductsRepositoryI } from './ProductsRepositoryI';
 import { Boom } from '@hapi/boom';
 import { MongoClient } from 'mongodb';
+import { HttpStatusCode } from '../domain/HttpStatusCode';
 
 export interface ProductsRepositoryProps {
   mongoClient: MongoClient;
@@ -25,7 +26,9 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
     this.props.mongoClient.close();
 
     if (!products.length) {
-      throw new Boom('Products not found', { statusCode: 404 });
+      throw new Boom('Products not found', {
+        statusCode: HttpStatusCode.NOT_FOUND,
+      });
     }
 
     return products.map(
@@ -55,7 +58,9 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
       .toArray();
 
     if (!products) {
-      throw new Boom('Product not found', { statusCode: 404 });
+      throw new Boom('Product not found', {
+        statusCode: HttpStatusCode.NOT_FOUND,
+      });
     }
 
     return products.map(
@@ -85,7 +90,9 @@ export class ProductsRepositoryImpl implements ProductsRepositoryI {
       .toArray();
 
     if (!products) {
-      throw new Boom('Product not found', { statusCode: 404 });
+      throw new Boom('Product not found', {
+        statusCode: HttpStatusCode.NOT_FOUND,
+      });
     }
     return products.map(
       (product) =>

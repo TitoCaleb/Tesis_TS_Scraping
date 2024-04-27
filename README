@@ -2,6 +2,5 @@
 
 1. Instalar las dependencias "npm i", usar una version de node 20 o superior
 2. Crear tu .env copiando los datos del .env de ejemplo
-2. Iniciar tu docker en tu computador, correr el comando `docker-compose up -d" para inicar el contenedor
-3. npm run start para iniciar la aplicacion y comenzar con el scrapeo
-
+3. Iniciar tu docker en tu computador, correr el comando `docker-compose up -d" para inicar el contenedor
+4. npm run start para iniciar la aplicacion y comenzar con el scrapeo

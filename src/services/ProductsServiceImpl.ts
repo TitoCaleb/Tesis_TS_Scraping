@@ -11,16 +11,26 @@ export class ProductsServiceImpl implements ProductsServiceI {
   constructor(private props: ProductsServiceImplProps) {}
 
   findAll(req: Request): Promise<Product[]> {
-    const response = this.props.productsRepository.findAll(req);
-    return response;
+    try {
+      const response = this.props.productsRepository.findAll(req);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
   }
   findByName(req: Request): Promise<Product[]> {
-    const response = this.props.productsRepository.findByName(req);
-    return response;
+    try {
+      const response = this.props.productsRepository.findByName(req);
+      return response;
+    } catch (error) {}
   }
 
   findByCategory(req: Request): Promise<Product[]> {
-    const response = this.props.productsRepository.findByCategory(req);
-    return response;
+    try {
+      const response = this.props.productsRepository.findByCategory(req);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

@@ -6,9 +6,10 @@ import {
 } from '../middlewares/errorMiddleware';
 import { productsRouter } from './productsRouter';
 import { storesRouter } from './storesRouter';
-import { productsController } from '../controllers';
+import { scrapeController } from '../controllers';
 import * as cron from 'node-cron';
 import * as cors from 'cors';
+import { categoryRouter } from './categoryRouter';
 
 const app = express();
 
@@ -32,6 +33,7 @@ const routerApi = (app: express.Application) => {
   app.use('/api/v1', router);
   router.use('/products', productsRouter);
   router.use('/stores', storesRouter);
+  router.use('/category', categoryRouter);
 };
 
 //Middlewares
@@ -44,13 +46,13 @@ app.use(errorHandler);
 // Creacion base de dato
 // let task = cron.schedule('*/2 * * * *', () => {
 //   // "59 59 23 * * *"
-//   productsController.scrape();
+//   scrapeController.scrape();
 //   console.log('Se corre la tarea cada 1 dia');
 // });
 
 // task.start();
 
-productsController.scrape();
+scrapeController.scrape();
 
 // Inicializacion del servidor
 app.listen(PORT, () => {

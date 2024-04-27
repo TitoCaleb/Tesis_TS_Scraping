@@ -1,11 +1,8 @@
 import { Request } from 'express';
 import { ProductsServiceI } from '../services/ProductsServiceI';
-import { ScrapingServiceI } from '../services/ScrapingServiceI';
-import { initDataBase } from '../database/config';
 
 export interface ProductsControllerProps {
   service: ProductsServiceI;
-  scrapservice: ScrapingServiceI;
 }
 
 export class ProductsController {
@@ -24,12 +21,5 @@ export class ProductsController {
   async findByCategory(request: Request) {
     const response = await this.props.service.findByCategory(request);
     return response;
-  }
-
-  async scrape() {
-    await initDataBase();
-    /* await this.props.scrapservice.scrapeCyC();
-    await this.props.scrapservice.scrapeSercoplus();
-    await this.props.scrapservice.scrapeImpacto(); */
   }
 }
